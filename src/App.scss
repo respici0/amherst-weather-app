@@ -1,0 +1,49 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC:400,700');
+
+$colors: (
+  background: #db5400,
+  innerBackground: whitesmoke,
+  primaryColor: white,
+  accentOne: #ffe100,
+  accentTwo: #3c00ff
+);
+
+@function colors($color-name) {
+  @return map-get($colors, $color-name)
+}
+
+$font: 'Amatic SC', cursive;
+
+body {
+  font-family: $font;
+  color: colors(primaryColor);
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background-color: colors(background);
+}
+
+content {
+  .title{
+    font-size: 36px;
+  }
+  input {
+    text-align: center;
+  }
+}
+
+.currentWrapper {
+  text-align: center;
+  background-color: colors(innerBackground);
+  border-radius: 5px;
+  width: 600px;
+  height: 400px;
+}
+
+
