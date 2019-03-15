@@ -10567,6 +10567,7 @@ body {
   font-weight: bold;
   font-size: 100%;
   color: whitesmoke;
+  background-color: #db3e0e;
 }
 
 #root {
@@ -10585,53 +10586,64 @@ body {
           align-items: center;
   height: 100vh;
   text-align: center;
-  background-color: #db3e0e;
 }
 
-.currentWeather {
+.currentWeather, .fiveDayForeCast {
   background-color: whitesmoke;
   color: #190133;
   border-radius: 5px;
   width: 600px;
 }
 
-.currentWeather h3 {
+.currentWeather h3, .fiveDayForeCast h3 {
   font-size: 40px;
+  text-decoration: underline;
 }
 
-.currentWeather .mainTemp {
-  font-size: 35px;
+.currentWeather .mainTemp, .fiveDayForeCast .mainTemp {
+  font-size: 32px;
 }
 
-.currentWeather .conditions {
+.currentWeather .conditions, .fiveDayForeCast .conditions {
   font-size: 25px;
 }
 
-.currentWeather #thermometer {
+.currentWeather #thermometer, .fiveDayForeCast #thermometer {
   color: #ff2200;
 }
 
-.currentWeather #cloudSunRain {
+.currentWeather #cloudSunRain, .fiveDayForeCast #cloudSunRain {
   color: #d49b00;
 }
 
-.currentWeather #city {
+.currentWeather #city, .fiveDayForeCast #city {
   color: #67cc34;
 }
 
-.currentWeather #fire {
+.currentWeather #fire, .fiveDayForeCast #fire {
   color: #ff2200;
 }
 
-.currentWeather #snowFlake {
+.currentWeather #snowFlake, .fiveDayForeCast #snowFlake {
   color: #06c1eb;
 }
 
-.currentWeather #rainDrop {
+.currentWeather #rainDrop, .fiveDayForeCast #rainDrop {
   color: #06c1eb;
 }
 
-.currentWeather #wind {
+.currentWeather #wind, .fiveDayForeCast #wind {
   color: #06c1eb;
+}
+
+.fiveDayForeCast #calender {
+  color: #67cc34;
+}
+
+.fiveDayForeCast hr {
+  border: none;
+  height: 2px;
+  color: #190133;
+  background-color: #190133;
 }
 /*# sourceMappingURL=App.css.map */

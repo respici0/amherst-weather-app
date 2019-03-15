@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.scss';
 import UserServices from './services/UserServices'
+import CurrentWeather from './components/CurrentWeather'
+import ForeCast from './components/ForeCast'
 
 class App extends Component {
   constructor(props) {
@@ -17,8 +19,8 @@ class App extends Component {
       wind: {
         deg: '',
         speed: '',
-      }
-      // date: ''
+      },
+      fiveDayForeCast: []
     }
   }
 
@@ -41,9 +43,6 @@ class App extends Component {
   }
 
   GetCurrentWeatherSuccess = resp => {
-    // let date = new Date();
-    // date.split('')
-    // console.log(date);
     console.log('CurrentWeather', resp.data);
     this.setState({
       cityName: resp.data.name,
@@ -63,7 +62,10 @@ class App extends Component {
   }
 
   GetFiveDayForecastSuccess = resp => {
-    console.log('FiveDayForecast', resp);
+    console.log('FiveDayForecast', resp.data.list);
+    this.setState({
+      fiveDayForeCast: resp.data.list
+    })
   }
 
   onError = resp => {
@@ -71,11 +73,11 @@ class App extends Component {
   }
 
   render() {
-    const currentWeather = this.state;
     return (
       <React.Fragment>
-        <div className="content">
+        <div className="viewContent">
           <h1 className="title">How's the weather today?</h1>
+          {/* <p>{date}</p> */}
           <div className="input-group mb-5">
             <input type="text" className="form-control" placeholder="Enter your zipcode" onChange={this.onChange} value={this.state.value} onKeyPress={this.onEnterOrButtonClick} />
             <div className="input-group-append">
@@ -83,25 +85,12 @@ class App extends Component {
             </div>
           </div>
         </div>
-        {currentWeather.cityName ? <div className="currentWeather container">
-          <div className="row">
-            <div className="mainTemp col-sm-5">
-              <h3><i className="fas fa-thermometer-half" id="thermometer"></i> Temperature</h3>
-              <p><span id="currentTemp">{currentWeather.currentTemp} &deg;F</span></p>
-              <p><i className="fas fa-city" id="city"></i></p>
-              <p>{currentWeather.cityName}, {currentWeather.country} </p>
-              {/* <p>{date}</p> */}
-            </div>
-            <div className="conditions col-sm-7">
-              <h3><i className="fas fa-cloud-sun-rain" id="cloudSunRain"></i> Current Conditions</h3>
-              <p className="highest"><i className="fas fa-fire-alt" id="fire"></i> Highest: {currentWeather.maxTemp}  &deg;F</p>
-              <p className="lowest"><i className="far fa-snowflake" id="snowFlake"></i> Lowest: {currentWeather.minTemp}  &deg;F</p>
-              <p className="humidity"><i className="fas fa-tint" id="rainDrop"></i> Humidity: {currentWeather.humidity} %</p>
-              <p className="wind"><i className="fas fa-wind" id="wind"></i> Wind: {currentWeather.wind.speed} Mph</p>
-            </div>
-          </div>
-        </div> : ''}
-      </React.Fragment>
+        {/* toggle between current weather and five day forcast */}
+        {this.state.cityName ? <CurrentWeather {...this.state} /> : ''}
+        <br />
+        {this.state.cityName && <ForeCast {...this.state} />}
+
+      </React.Fragment >
     );
   }
 }

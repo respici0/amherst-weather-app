@@ -23,6 +23,7 @@ body {
   font-weight: bold;
   font-size: 100%;
   color: colors(primaryColor);
+  background-color: colors(background);
 }
 
 #root {
@@ -32,9 +33,7 @@ body {
   align-items: center;
   height: 100vh;
   text-align: center;
-  background-color: colors(background);
 }
-
 
 .currentWeather {
   background-color: colors(innerBackground);
@@ -45,10 +44,11 @@ body {
 
   h3 {
     font-size: 40px;
+    text-decoration: underline;
   }
 
   .mainTemp {
-    font-size: 35px;
+    font-size: 32px;
   }
   .conditions {
     font-size: 25px;
@@ -75,8 +75,26 @@ body {
     #wind {
       color: colors(accentTwo)
     }
-
-  
 }
+
+.fiveDayForeCast {
+  @extend .currentWeather;
+
+  #calender {
+    color: colors(city);
+  }
+  hr {
+    border: none;
+    height: 2px;
+    color: colors(accentOne);
+    background-color: colors(accentOne);
+  }
+}
+// @media screen and (width: 787px) {
+//       .currentWeather {
+//         transform: scale(0.6);
+//       }
+//     }
+
 
 
