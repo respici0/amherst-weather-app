@@ -10582,14 +10582,6 @@ body {
   background-color: #db5400;
 }
 
-content .title {
-  font-size: 36px;
-}
-
-content input {
-  text-align: center;
-}
-
 .currentWrapper {
   text-align: center;
   background-color: whitesmoke;
