@@ -7,6 +7,7 @@ const ForeCast = props => (
                 <div className="card-header" >
                     <button className="btn btn-info" type="button" data-toggle="collapse" data-target="#foreCastList" aria-expanded="true" aria-controls="foreCastList">
                         <h1><i className="fas fa-calendar-alt" id="calender"></i> 5 Day forecast</h1>
+                        {/* <p>(3 Hour Updates!)</p> */}
                     </button>
                 </div>
                 {/* map list of forecast here into accordian */}
@@ -16,13 +17,15 @@ const ForeCast = props => (
                         <div key={i} className="card-body">
                             <div className="row">
                                 <div className="col">
-                                    <p>{obj.dt_txt.slice(0, 11)}</p>
+                                    <p>{obj.dt_txt.slice(5, 11)}</p>
+                                    <p>{obj.dt_txt.slice(0, 4)}</p>
                                 </div>
                                 <div className="col">
                                     <p><i className="fas fa-thermometer-half" id="thermometer"></i> {obj.main.temp} &deg;F</p>
                                 </div>
                                 <div className="col">
-                                    <p><i className="fas fa-cloud-sun-rain" id="cloudSunRain"></i> {obj.weather[0].description}</p>
+                                    <p><i className="fas fa-cloud-sun-rain" id="cloudSunRain"></i></p>
+                                    <p>{obj.weather[0].description}</p>
                                 </div>
                                 <div className="col">
                                     <p><i className="fas fa-fire-alt" id="fire"></i> {obj.main.temp_max} &deg;F</p>
@@ -30,10 +33,10 @@ const ForeCast = props => (
                                 </div>
                                 <div className="col">
                                     <p><i className="fas fa-tint" id="rainDrop"></i> {obj.main.humidity}%</p>
-                                </div>
-                                <div className="col">
                                     <p><i className="fas fa-wind" id="wind"></i> {obj.wind.speed} Mph</p>
                                 </div>
+                                {/* <div className="col">
+                                </div> */}
                             </div>
                             <hr />
                         </div >

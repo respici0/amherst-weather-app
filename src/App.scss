@@ -35,8 +35,19 @@ body {
   text-align: center;
 }
 
+.viewContent{
+  position: relative;
+  
+  input[type=text] {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
 .currentWeather {
   background-color: colors(innerBackground);
+  position: relative;
   color: colors(accentOne);
   border-radius: 5px;
   width: 600px;
@@ -79,6 +90,7 @@ body {
 
 .fiveDayForeCast {
   @extend .currentWeather;
+  font-size: 20px;
 
   #calender {
     color: colors(city);

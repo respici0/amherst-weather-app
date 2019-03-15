@@ -36,10 +36,16 @@ class App extends Component {
   onEnterOrButtonClick = e => {
     let code = e.keyCode || e.which;
     let zipcode = this.state.zipcode;
-    if (code === 13 || e.target.id === "weatherButton") {
+    let validNumbers = /^[0-9]*$/;
+
+    if ((code === 13 || e.target.id) && zipcode === '') {
+      alert("Please enter a valid zipcode");
+    }
+    else if ((code === 13 || e.target.id === "weatherButton") && zipcode !== validNumbers) {
       UserServices.getCurrentWeather(zipcode, this.GetCurrentWeatherSuccess, this.onError);
       UserServices.getFiveDayForecast(zipcode, this.GetFiveDayForecastSuccess, this.onError);
     }
+
   }
 
   GetCurrentWeatherSuccess = resp => {
@@ -77,15 +83,14 @@ class App extends Component {
       <React.Fragment>
         <div className="viewContent">
           <h1 className="title">How's the weather today?</h1>
-          {/* <p>{date}</p> */}
           <div className="input-group mb-5">
-            <input type="text" className="form-control" placeholder="Enter your zipcode" onChange={this.onChange} value={this.state.value} onKeyPress={this.onEnterOrButtonClick} />
+            <input type="text" className="form-control" placeholder="Enter city zipcode ex.55521"  onChange={this.onChange} value={this.state.value} onKeyPress={this.onEnterOrButtonClick} />
             <div className="input-group-append">
-              <button className="btn btn-info" id="weatherButton" type="button" onClick={this.onEnterOrButtonClick}><i className="fas fa-search"></i> Let's find out!</button>
+              <button className="btn btn-info" id="weatherButton" type="button" onClick={this.onEnterOrButtonClick}><i class="fas fa-globe-americas"></i> Let's find out!</button>
             </div>
           </div>
         </div>
-        {/* toggle between current weather and five day forcast */}
+        {/* toggle between current weather and five day forcast if I have time*/}
         {this.state.cityName ? <CurrentWeather {...this.state} /> : ''}
         <br />
         {this.state.cityName && <ForeCast {...this.state} />}

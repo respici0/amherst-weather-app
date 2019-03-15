@@ -10588,8 +10588,19 @@ body {
   text-align: center;
 }
 
+.viewContent {
+  position: relative;
+}
+
+.viewContent input[type=text] {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
 .currentWeather, .fiveDayForeCast {
   background-color: whitesmoke;
+  position: relative;
   color: #190133;
   border-radius: 5px;
   width: 600px;
@@ -10634,6 +10645,10 @@ body {
 
 .currentWeather #wind, .fiveDayForeCast #wind {
   color: #06c1eb;
+}
+
+.fiveDayForeCast {
+  font-size: 20px;
 }
 
 .fiveDayForeCast #calender {
