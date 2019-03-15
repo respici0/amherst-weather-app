@@ -2,11 +2,14 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC:400,700');
 
 $colors: (
-  background: #db5400,
+  background: #db3e0e,
   innerBackground: whitesmoke,
-  primaryColor: white,
-  accentOne: #ffe100,
-  accentTwo: #3c00ff
+  primaryColor: whitesmoke,
+  accentOne: #190133,
+  accentTwo: #06c1eb,
+  thermometer:#ff2200,
+  cloudSunRain: #d49b00,
+  city: #67cc34
 );
 
 @function colors($color-name) {
@@ -17,11 +20,14 @@ $font: 'Amatic SC', cursive;
 
 body {
   font-family: $font;
+  font-weight: bold;
+  font-size: 100%;
   color: colors(primaryColor);
 }
 
 #root {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -30,12 +36,47 @@ body {
 }
 
 
-.currentWrapper {
-  text-align: center;
+.currentWeather {
   background-color: colors(innerBackground);
+  color: colors(accentOne);
   border-radius: 5px;
   width: 600px;
-  height: 400px;
+  // height: 400px;
+
+  h3 {
+    font-size: 40px;
+  }
+
+  .mainTemp {
+    font-size: 35px;
+  }
+  .conditions {
+    font-size: 25px;
+  }
+
+    #thermometer {
+      color: colors(thermometer);
+    }
+    #cloudSunRain {
+      color: colors(cloudSunRain);
+    }
+    #city {
+      color: colors(city);
+    }
+    #fire {
+      color: colors(thermometer)
+    }
+    #snowFlake {
+      color: colors(accentTwo)
+    }
+    #rainDrop {
+      color: colors(accentTwo)
+    }
+    #wind {
+      color: colors(accentTwo)
+    }
+
+  
 }
 
 

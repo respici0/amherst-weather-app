@@ -10564,13 +10564,19 @@ a.text-dark:hover, a.text-dark:focus {
 
 body {
   font-family: "Amatic SC", cursive;
-  color: white;
+  font-weight: bold;
+  font-size: 100%;
+  color: whitesmoke;
 }
 
 #root {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -10579,14 +10585,53 @@ body {
           align-items: center;
   height: 100vh;
   text-align: center;
-  background-color: #db5400;
+  background-color: #db3e0e;
 }
 
-.currentWrapper {
-  text-align: center;
+.currentWeather {
   background-color: whitesmoke;
+  color: #190133;
   border-radius: 5px;
   width: 600px;
-  height: 400px;
+}
+
+.currentWeather h3 {
+  font-size: 40px;
+}
+
+.currentWeather .mainTemp {
+  font-size: 35px;
+}
+
+.currentWeather .conditions {
+  font-size: 25px;
+}
+
+.currentWeather #thermometer {
+  color: #ff2200;
+}
+
+.currentWeather #cloudSunRain {
+  color: #d49b00;
+}
+
+.currentWeather #city {
+  color: #67cc34;
+}
+
+.currentWeather #fire {
+  color: #ff2200;
+}
+
+.currentWeather #snowFlake {
+  color: #06c1eb;
+}
+
+.currentWeather #rainDrop {
+  color: #06c1eb;
+}
+
+.currentWeather #wind {
+  color: #06c1eb;
 }
 /*# sourceMappingURL=App.css.map */
