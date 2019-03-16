@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CurrentWeather = props => (
-    <React.Fragment>
+    < React.Fragment >
         <div className="currentWeather container">
             <h3>Current Conditions</h3>
             <div className="row">
@@ -18,7 +18,7 @@ const CurrentWeather = props => (
                 </div>
             </div>
         </div>
-    </React.Fragment>
+    </React.Fragment >
 )
 
 export default CurrentWeather;
