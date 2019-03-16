@@ -6,7 +6,7 @@ import WeatherReducer from '../src/redux/WeatherReducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const Store = createStore(
-  combineReducers({ weather: WeatherReducer }),
+  combineReducers({ WeatherReducer }),
   composeEnhancers(applyMiddleware(createLogger(), thunk, promise))
 );
 

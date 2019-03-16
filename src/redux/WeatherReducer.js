@@ -1,4 +1,4 @@
-import { ADD_CURRENT_WEATHER, ADD_5DAY_FORECAST } from "../redux/UserActions"
+import { ADD_CURRENT_WEATHER } from "../redux/UserActions"
 
 const WeatherReducer = (state = {}, { type, payload }) => {
     switch (type) {
@@ -17,12 +17,12 @@ const WeatherReducer = (state = {}, { type, payload }) => {
                 }
             };
             break;
-        case ADD_5DAY_FORECAST:
-            state = {
-                ...state,
-                fiveDayForeCast: payload.list
-            };
-            break;
+        // case ADD_5DAY_FORECAST:
+        //     state = {
+        //         ...state,
+        //         fiveDayForeCast: payload.list
+        //     };
+        //     break;
         default:
             return state
     }

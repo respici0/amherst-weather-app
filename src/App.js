@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import UserServices from './services/UserServices'
-import { getCurrentWeather, getFiveDayForecast } from './redux/UserActions';
+import { getCurrentWeather } from './redux/UserActions';
 import CurrentWeather from './components/CurrentWeather'
 import ForeCast from './components/ForeCast'
 import { connect } from 'react-redux'
@@ -10,35 +10,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //   zipcode: '',
-      //   cityName: '',
-      //   country: '',
-      //   currentTemp: '',
-      //   maxTemp: '',
-      //   minTemp: '',
-      //   humidity: '',
-      //   weather: '',
-      //   wind: {
-      //     deg: '',
-      //     speed: '',
-      //   },
-      //   fiveDayForeCast: []
-      // }
       fiveDayForeCast: []
     }
   }
-
-
-  // componentWillReceiveProps = () => {
-  //   this.setState({ fiveDayForeCast: this.props.weather.fiveDayForeCast })
-  // }
 
   onChange = e => {
     let zipcode = e.target.value;
     this.setState({
       zipcode
-    }, () => {
-      console.log("Current weather", this.state.zipcode);
     });
   }
 
@@ -51,32 +30,14 @@ class App extends Component {
       alert("Please enter a valid zipcode");
     }
     else if ((code === 13 || e.target.id === "weatherButton") && zipcode !== validNumbers) {
-      // UserServices.getCurrentWeather(zipcode, this.GetCurrentWeatherSuccess, this.onError);
       UserServices.getFiveDayForecast(zipcode, this.GetFiveDayForecastSuccess, this.onError);
       this.props.getCurrentWeather(zipcode)
-      // this.props.getFiveDayForecast(zipcode)
-      console.log(this.state)
+
+      // I initially had both API coming through my actions and being held in my reducer for dispatch, but the array retrieved through my reducer would not map correctly.
+      // I have my code commented out through in userActions, as well as WeatherReducer so you can view, both seem to work fine & retrieve the array fine (but maybe I am missing something that you folks will catch!)
+      // this.props.getFiveDayForecast(zipcode) <-- function dispatched to retrieve array for 5dayforecast works perfectly and returns array to my object
     }
   }
-
-  // GetCurrentWeatherSuccess = resp => {
-  //   console.log('CurrentWeather', resp.data);
-  //   this.setState({
-  //     cityName: resp.data.name,
-  //     country: resp.data.sys.country,
-  //     currentTemp: resp.data.main.temp,
-  //     maxTemp: resp.data.main.temp_max,
-  //     minTemp: resp.data.main.temp_min,
-  //     humidity: resp.data.main.humidity,
-  //     weather: resp.data.weather[0].description,
-  //     wind: {
-  //       deg: resp.data.wind.deg,
-  //       speed: resp.data.wind.speed,
-  //     },
-  //   }, () => {
-  //     console.log("current weather", this.state)
-  //   });
-  // }
 
   GetFiveDayForecastSuccess = resp => {
     this.setState({
@@ -84,12 +45,15 @@ class App extends Component {
     })
   }
 
-  // onError = resp => {
-  //   console.log(resp);
-  // }
+  onError = resp => console.log(resp);
+
 
   render() {
-    // console.log(this.state);
+
+    // When I console.log the 5dayforcast API retrieved in my UserServices and store it to my local state I am able to map it, compared to the array retrieved through my redux store.
+    // this.state.fiveDayForeCast.map(obj => obj.list) <-- maps correctly
+    // this.props.weather.fiveDayForeCast.map(obj => obj.list) <-- comes back undefined. Arrays are not muttable, so maybe I have unintentionally returned my object incorrectly
+    // for now I retrieved the data via axios, not ideal but I will look into more
     return (
       <React.Fragment>
         <div className="viewContent">
@@ -101,23 +65,21 @@ class App extends Component {
             </div>
           </div>
         </div>
-        {/* toggle between current weather and five day forcast if I have time*/}
         {this.props.weather.cityName ? <CurrentWeather {...this.props.weather} /> : ''}
         <br />
         {this.props.weather.cityName && <ForeCast {...this.state} />}
-
       </React.Fragment >
     );
   }
 }
 
 const mapStateToProps = state => ({
-  weather: state.weather
+  weather: state.WeatherReducer
 })
 
 const mapDispatchToProps = {
   getCurrentWeather,
-  getFiveDayForecast
+  // getFiveDayForecast
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
