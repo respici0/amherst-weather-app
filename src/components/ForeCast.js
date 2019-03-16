@@ -5,7 +5,7 @@ const ForeCast = props => (
         <div className="fiveDayForeCast">
             <div className="accordion" id="foreCastAccordian">
                 <div className="card-header" >
-                    <button className="btn btn-info" type="button" data-toggle="collapse" data-target="#foreCastList" aria-expanded="true" aria-controls="foreCastList">
+                    <button className="btn btn-info" type="button" data-toggle="collapse" data-target="#foreCastList" aria-expanded="true" aria-controls="foreCastList" >
                         <h1><i className="fas fa-calendar-alt" id="calender"></i> 5 Day forecast</h1>
                     </button>
                 </div>
@@ -15,11 +15,10 @@ const ForeCast = props => (
                     {/* filter?(decided not too) just map if [].slice() === to first numbers. */}
                     {props.fiveDayForeCast.map((obj, i) => obj.dt_txt.slice(11, 13) === ("00" || "03" || "06" || "09" || "12" || "15" || "18" || "21") ?
                         <div key={i} className="card-body">
+                            <div>
+                                <h5>{obj.dt_txt.slice(5, 11)}{obj.dt_txt.slice(0, 4)}</h5>
+                            </div>
                             <div className="row">
-                                <div className="col">
-                                    <p>{obj.dt_txt.slice(5, 11)}</p>
-                                    <p>{obj.dt_txt.slice(0, 4)}</p>
-                                </div>
                                 <div className="col">
                                     <p><i className="fas fa-thermometer-half" id="thermometer"></i> {obj.main.temp} &deg;F</p>
                                 </div>
@@ -38,6 +37,7 @@ const ForeCast = props => (
                             </div>
                             <hr />
                         </div >
+
                         : ''
                     )}
                 </div>
