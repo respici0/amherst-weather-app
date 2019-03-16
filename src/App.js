@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
-// import UserServices from './services/UserServices'
+import UserServices from './services/UserServices'
 import { getCurrentWeather, getFiveDayForecast } from './redux/UserActions';
 import CurrentWeather from './components/CurrentWeather'
 import ForeCast from './components/ForeCast'
@@ -10,21 +10,28 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      zipcode: '',
-      cityName: '',
-      country: '',
-      currentTemp: '',
-      maxTemp: '',
-      minTemp: '',
-      humidity: '',
-      weather: '',
-      wind: {
-        deg: '',
-        speed: '',
-      },
+      //   zipcode: '',
+      //   cityName: '',
+      //   country: '',
+      //   currentTemp: '',
+      //   maxTemp: '',
+      //   minTemp: '',
+      //   humidity: '',
+      //   weather: '',
+      //   wind: {
+      //     deg: '',
+      //     speed: '',
+      //   },
+      //   fiveDayForeCast: []
+      // }
       fiveDayForeCast: []
     }
   }
+
+
+  // componentWillReceiveProps = () => {
+  //   this.setState({ fiveDayForeCast: this.props.weather.fiveDayForeCast })
+  // }
 
   onChange = e => {
     let zipcode = e.target.value;
@@ -44,13 +51,12 @@ class App extends Component {
       alert("Please enter a valid zipcode");
     }
     else if ((code === 13 || e.target.id === "weatherButton") && zipcode !== validNumbers) {
-      //  UserServices.getCurrentWeather(zipcode, this.GetCurrentWeatherSuccess, this.onError);
-      //  UserServices.getFiveDayForecast(zipcode, this.GetFiveDayForecastSuccess, this.onError);
+      // UserServices.getCurrentWeather(zipcode, this.GetCurrentWeatherSuccess, this.onError);
+      UserServices.getFiveDayForecast(zipcode, this.GetFiveDayForecastSuccess, this.onError);
       this.props.getCurrentWeather(zipcode)
-      this.props.getFiveDayForecast(zipcode)
-      console.log(this.props)
+      // this.props.getFiveDayForecast(zipcode)
+      console.log(this.state)
     }
-
   }
 
   // GetCurrentWeatherSuccess = resp => {
@@ -72,19 +78,18 @@ class App extends Component {
   //   });
   // }
 
-  // GetFiveDayForecastSuccess = resp => {
-  //   console.log('FiveDayForecast', resp.data.list);
-  //   this.setState({
-  //     fiveDayForeCast: resp.data.list
-  //   })
-  // }
+  GetFiveDayForecastSuccess = resp => {
+    this.setState({
+      fiveDayForeCast: resp.data.list
+    })
+  }
 
   // onError = resp => {
   //   console.log(resp);
   // }
 
   render() {
-    console.log("redux", this.props);
+    // console.log(this.state);
     return (
       <React.Fragment>
         <div className="viewContent">
@@ -97,16 +102,17 @@ class App extends Component {
           </div>
         </div>
         {/* toggle between current weather and five day forcast if I have time*/}
-        {this.state.cityName ? <CurrentWeather {...this.props} /> : ''}
+        {this.props.weather.cityName ? <CurrentWeather {...this.props.weather} /> : ''}
         <br />
-        {this.state.cityName && <ForeCast {...this.props} />}
+        {this.props.weather.cityName && <ForeCast {...this.state} />}
+
       </React.Fragment >
     );
   }
 }
 
 const mapStateToProps = state => ({
-  user: state.UserReducer
+  weather: state.weather
 })
 
 const mapDispatchToProps = {

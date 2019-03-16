@@ -1,13 +1,13 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
 import { createLogger } from 'redux-logger';
-import UserReducer from '../src/redux/UserReducer';
+import WeatherReducer from '../src/redux/WeatherReducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const Store = createStore(
-  UserReducer,
-  composeEnhancers(applyMiddleware(createLogger(), thunk, promise()))
+  combineReducers({ weather: WeatherReducer }),
+  composeEnhancers(applyMiddleware(createLogger(), thunk, promise))
 );
 
 export default Store;
