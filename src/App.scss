@@ -90,6 +90,7 @@ body {
 .fiveDayForeCast {
   @extend .currentWeather;
   font-size: 20px;
+  margin-bottom: 20px;
 
   #calender {
     color: colors(city);
@@ -102,9 +103,19 @@ body {
   }
 }
 
-  @media screen and (max-width: 650px) {
+  @media screen and (min-width: 1024px) {
     .viewContent {
-      transform: scale(0.7);
+      transform: scale(1.2);
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .currentWeather, .fiveDayForeCast {
+      max-width: 100%;
+      transform: scale(0.9)
+    }
+    .fiveDayForeCast {
+      font-size: 16px;
     }
   }
 

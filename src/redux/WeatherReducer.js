@@ -10,9 +10,9 @@ const WeatherReducer = (state = {}, { type, payload }) => {
                 currentTemp: payload.main.temp,
                 maxTemp: payload.main.temp_max,
                 minTemp: payload.main.temp_min,
-                weather: payload.main.humidity,
+                humidity: payload.main.humidity,
+                weather: payload.weather[0].description,
                 wind: {
-                    deg: payload.weather[0].description,
                     speed: payload.wind.speed,
                 }
             };
