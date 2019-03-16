@@ -9,9 +9,10 @@ const ForeCast = props => (
                         <h1><i className="fas fa-calendar-alt" id="calender"></i> 5 Day forecast</h1>
                     </button>
                 </div>
-                {/* map list of forecast here into accordian */}
+                {/* map list of forecast updates here into accordian but don't want to show all 30+ post */}
                 <div id="foreCastList" className="collapse hide" data-parent="#foreCastAccordian">
-                    {/* updates every three hours depending on numbers */}
+                    {/* updates every three hours depending on the first two initial numbers in 24 hour clock "00.00.00". */}
+                    {/* filter?(decided not too) just map if [].slice() === to first numbers. */}
                     {props.fiveDayForeCast.map((obj, i) => obj.dt_txt.slice(11, 13) === ("00" || "03" || "06" || "09" || "12" || "15" || "18" || "21") ?
                         <div key={i} className="card-body">
                             <div className="row">

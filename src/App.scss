@@ -51,7 +51,6 @@ body {
   color: colors(accentOne);
   border-radius: 5px;
   width: 600px;
-  // height: 400px;
 
   h3 {
     font-size: 40px;
@@ -102,11 +101,12 @@ body {
     background-color: colors(accentOne);
   }
 }
-// @media screen and (width: 787px) {
-//       .currentWeather {
-//         transform: scale(0.6);
-//       }
-//     }
+
+  @media screen and (max-width: 650px) {
+    .viewContent {
+      transform: scale(0.7);
+    }
+  }
 
 
 
