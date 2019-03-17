@@ -32,7 +32,6 @@ class App extends Component {
     else if ((code === 13 || e.target.id === "weatherButton") && zipcode !== validNumbers) {
       UserServices.getFiveDayForecast(zipcode, this.GetFiveDayForecastSuccess, this.onError);
       this.props.getCurrentWeather(zipcode)
-
       // I initially had both API coming through my actions and being held in my reducer for dispatch, but the array retrieved through my reducer would not map correctly.
       // I have my code commented out through in userActions, as well as WeatherReducer so you can view, both seem to work fine & retrieve the array fine (but maybe I am missing something that you folks will catch!)
       // this.props.getFiveDayForecast(zipcode) <-- function dispatched to retrieve array for 5dayforecast works perfectly and returns array to my object
@@ -49,10 +48,11 @@ class App extends Component {
 
 
   render() {
-
+    //console.log(this.state.fiveDayForeCast) <-- list from local state
+    //console.log(this.props.weather.fiveDayForeCast) <-- list from redux state
     // When I console.log the 5dayforcast API retrieved in my UserServices and store it to my local state I am able to map it, compared to the array retrieved through my redux store.
-    // this.state.fiveDayForeCast.map(obj => obj.list) <-- maps correctly
-    // this.props.weather.fiveDayForeCast.map(obj => obj.list) <-- comes back undefined. Arrays are not muttable, so maybe I have unintentionally returned my object incorrectly
+    // this.state.fiveDayForeCast <-- maps correctly
+    // this.props.weather.fiveDayForeCast <-- comes back undefined. Arrays are muttable, so maybe I have unintentionally returned my object incorrectly
     // for now I retrieved the data via axios, not ideal but I will look into more
     return (
       <React.Fragment>
