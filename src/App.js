@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import './App.scss';
-import UserServices from './services/UserServices'
+import UserServices from './services/UserServices';
 import { getCurrentWeather } from './redux/UserActions';
-import CurrentWeather from './components/CurrentWeather'
-import ForeCast from './components/ForeCast'
-import { connect } from 'react-redux'
+import CurrentWeather from './components/CurrentWeather';
+import ForeCast from './components/ForeCast';
+import { connect } from 'react-redux';
+import Switch from 'react-switch';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fiveDayForeCast: []
+      fiveDayForeCast: [],
+      checked: true,
+      isFarenheit: true
     }
   }
 
@@ -20,6 +23,39 @@ class App extends Component {
       city
     });
   }
+
+  switchChange = checked => {
+    let isFarenheit = this.state.isFarenheit;
+    if (isFarenheit) {
+      this.setState({
+        checked: false,
+        isFarenheit: false,
+      }, () => console.log("farenheit?", this.state));
+    } else {
+      this.setState({
+        checked: true,
+        isFarenheit: true
+      }
+        // , () => {
+        //   this.toCelsuis();
+        // }
+      );
+    }
+  }
+
+  // toCelsuis = () => {
+  //   let { currentTemp, maxTemp, minTemp } = this.state;
+  //   currentTemp = (currentTemp - 32) * 5 / 9;
+  //   maxTemp = (maxTemp - 32) * 5 / 9;
+  //   minTemp = (minTemp - 32) * 5 / 9;
+  //   this.setState({
+  //     ...this.state,
+  //     currentTemp,
+  //     maxTemp,
+  //     minTemp
+  //   })
+  // }
+
 
   onEnterOrButtonClick = e => {
     let code = e.keyCode || e.which;
@@ -36,13 +72,24 @@ class App extends Component {
       // I have my code commented out through in userActions, as well as WeatherReducer so you can view, both seem to work fine & retrieve the array fine (but maybe I am missing something that you folks will catch!)
       // this.props.getFiveDayForecast(city) <-- function dispatched to retrieve array for 5dayforecast works perfectly and returns array to my object
     }
+    // this.setState({
+    //   cityName: this.props.weather.cityName,
+    //   country: this.props.weather.country,
+    //   currentTemp: this.props.weather.currentTemp,
+    //   maxTemp: this.props.weather.maxTemp,
+    //   minTemp: this.props.weather.minTemp,
+    //   humidity: this.props.weather.humidity,
+    //   weather: this.props.weather.weather,
+    //   wind: {
+    //     speed: this.props.weather.speed,
+    //   }
+    // })
   }
 
   GetFiveDayForecastSuccess = resp => {
     this.setState({
       fiveDayForeCast: resp.data.list
     })
-    console.log('5DAY', this.state)
   }
 
   onError = resp => console.log(resp);
@@ -59,11 +106,14 @@ class App extends Component {
       <React.Fragment>
         <div className="viewContent">
           <h1 className="title">How's the weather today?</h1>
-          <div className="input-group mb-5">
+          <div className="input-group mb-2">
             <input type="text" className="form-control" placeholder="City name ex.Anaheim" onChange={this.onChange} value={this.state.value} onKeyPress={this.onEnterOrButtonClick} />
             <div className="input-group-append">
               <button className="btn btn-info" id="weatherButton" type="button" onClick={this.onEnterOrButtonClick}><i className="fas fa-globe-americas"></i> Let's find out!</button>
             </div>
+          </div>
+          <div>
+            {this.props.weather.cityName && <Switch className="mb-3" onChange={this.switchChange} checked={this.state.checked} height={20} width={40} checkedIcon={<p>&deg;F</p>} uncheckedIcon={<p>&deg;C</p>} />}
           </div>
         </div>
         {this.props.weather.cityName ? <CurrentWeather {...this.props.weather} /> : ''}
