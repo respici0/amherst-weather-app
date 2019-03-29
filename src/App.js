@@ -15,26 +15,26 @@ class App extends Component {
   }
 
   onChange = e => {
-    let zipcode = e.target.value;
+    let city = e.target.value;
     this.setState({
-      zipcode
+      city
     });
   }
 
   onEnterOrButtonClick = e => {
     let code = e.keyCode || e.which;
-    let zipcode = this.state.zipcode;
-    let validNumbers = /^[0-9]*$/;
+    let city = this.state.city;
+    let validLetters = /^[a-z][a-z\s]*$/;
 
-    if ((code === 13 || e.target.id) && zipcode === '') {
-      alert("Please enter a valid zipcode");
+    if ((code === 13 || e.target.id) && city === '') {
+      alert("Please enter a valid city");
     }
-    else if ((code === 13 || e.target.id === "weatherButton") && zipcode !== validNumbers) {
-      UserServices.getFiveDayForecast(zipcode, this.GetFiveDayForecastSuccess, this.onError);
-      this.props.getCurrentWeather(zipcode)
+    else if ((code === 13 || e.target.id === "weatherButton") && city !== validLetters) {
+      UserServices.getFiveDayForecast(city, this.GetFiveDayForecastSuccess, this.onError);
+      this.props.getCurrentWeather(city)
       // I initially had both API coming through my actions and being held in my reducer for dispatch, but the array retrieved through my reducer would not map correctly.
       // I have my code commented out through in userActions, as well as WeatherReducer so you can view, both seem to work fine & retrieve the array fine (but maybe I am missing something that you folks will catch!)
-      // this.props.getFiveDayForecast(zipcode) <-- function dispatched to retrieve array for 5dayforecast works perfectly and returns array to my object
+      // this.props.getFiveDayForecast(city) <-- function dispatched to retrieve array for 5dayforecast works perfectly and returns array to my object
     }
   }
 
@@ -42,6 +42,7 @@ class App extends Component {
     this.setState({
       fiveDayForeCast: resp.data.list
     })
+    console.log('5DAY', this.state)
   }
 
   onError = resp => console.log(resp);
@@ -59,7 +60,7 @@ class App extends Component {
         <div className="viewContent">
           <h1 className="title">How's the weather today?</h1>
           <div className="input-group mb-5">
-            <input type="text" className="form-control" placeholder="Enter city zipcode ex.55521" onChange={this.onChange} value={this.state.value} onKeyPress={this.onEnterOrButtonClick} />
+            <input type="text" className="form-control" placeholder="City name ex.Anaheim" onChange={this.onChange} value={this.state.value} onKeyPress={this.onEnterOrButtonClick} />
             <div className="input-group-append">
               <button className="btn btn-info" id="weatherButton" type="button" onClick={this.onEnterOrButtonClick}><i className="fas fa-globe-americas"></i> Let's find out!</button>
             </div>
